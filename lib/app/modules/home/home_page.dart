@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokemon_dio/app/modules/home/all_cards_page.dart';
+import 'package:pokemon_dio/app/modules/home/my_cards_page.dart';
 import 'detail_page.dart';
 import 'domain/pokemon.dart';
 import 'home_controller.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   List<Widget> pages = [
     AllCardsPage(),
     Container(),
-    Container()
+    MyCardsPage()
   ];
 
   @override
@@ -55,16 +56,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         onTap: (index) => changePage(index),
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.all_inclusive),
-              label: "Cards"
+            icon: Icon(Icons.all_inclusive),
+            label: "Cards"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: "Favoritos"
+            icon: Icon(Icons.favorite),
+            label: "Favoritos"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Obtidos"
+            icon: Icon(Icons.person),
+            label: "Obtidos"
           )
         ],),
       body: pages[_currentIndex],
@@ -73,9 +74,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   openPageDetail(Pokemon pokemon) {
     Navigator.of(context).push(PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) {
-          return PageDetail(pokemon: pokemon);
-        })
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return PageDetail(pokemon: pokemon);
+      })
     );
   }
 
