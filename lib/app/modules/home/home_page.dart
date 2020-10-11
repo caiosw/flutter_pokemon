@@ -15,31 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
 
-  List<Pokemon> pokemons = [
-      Pokemon(
-        id: '1',
-        types: ['Water'],
-        imageUrl: 'https://images.pokemontcg.io/ex16/16.png',
-        imageUrlHiRes: 'https://images.pokemontcg.io/ex16/16_hires.png',
-        name: 'Bulbasaur'
-      ),
-      Pokemon(
-          id: '21',
-          types: ['Fire'],
-          imageUrl: 'https://images.pokemontcg.io/ex16/17.png',
-          imageUrlHiRes: 'https://images.pokemontcg.io/ex16/17_hires.png',
-          name: 'Charizard'
-      ),
-    Pokemon(
-        id: '3',
-        types: ['Fire'],
-        imageUrl: 'https://images.pokemontcg.io/ex16/18.png',
-        imageUrlHiRes: 'https://images.pokemontcg.io/ex16/18_hires.png',
-        name: 'Rato'
-    ),
-
-  ];
-
   int _currentIndex = 0;
 
   List<Widget> pages = [

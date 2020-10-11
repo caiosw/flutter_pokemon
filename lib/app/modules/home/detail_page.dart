@@ -48,7 +48,7 @@ class _PageDetailState extends State<PageDetail> {
                     child: Visibility(
                       visible: !showExpandedCard,
                       child: Hero(
-                          tag: widget.pokemon.id,
+                          tag: widget.pokemon.uniqueId,
                           child: Image.network(widget.pokemon.imageUrl)
                       ),
                     ),

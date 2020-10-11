@@ -26,23 +26,46 @@ class PokemonRepository extends Disposable {
       pokemons = new List();
     }
 
-    pokemons.add(pokemon.toJson());
+    pokemons.add(pokemon.toJson(CardType.MY_CARD));
     shared.setStringList(OWNED_KEY, pokemons);
   }
 
   Future<List<Pokemon>> getOwnedPokemons() async {
     var shared = await SharedPreferences.getInstance();
-
     var pokemons = shared.getStringList(OWNED_KEY);
+
+    print('teste');
+    print(pokemons.toString());
 
     if (pokemons == null) {
       return [];
     }
 
-    return pokemons.map<Pokemon>((json) => Pokemon.fromJson(json)).toList();
+    await updateOldPokemonList(pokemons);
+    return shared
+        .getStringList(OWNED_KEY)
+        .map<Pokemon>((json) => Pokemon.fromJson(json))
+        .toList();
+  }
+
+  updateOldPokemonList (List<String>pokemons) async {
+    var loadedPokemons =
+        pokemons.map<Pokemon>((pokemon) => Pokemon.fromJson(pokemon)).toList();
+
+    var mustReload = loadedPokemons
+      .firstWhere((element) => element.cardType == CardType.PUBLIC, orElse: () => null);
+
+    if (mustReload != null) {
+      var shared = await SharedPreferences.getInstance();
+      shared.setStringList(OWNED_KEY, []);
+      for (Pokemon pokemon in loadedPokemons) {
+        await addToOwnedList(pokemon);
+      }
+    }
   }
 
   Future<List<Pokemon>> getAllPokemons() async {
+
     final response =
     await client.get('https://api.pokemontcg.io/v1/cards/');
     if (response != null && response.statusCode <= 300) {
