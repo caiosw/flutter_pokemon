@@ -2,7 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import '../home_controller.dart';
+import '../home_module.dart';
+import '../pokemon_repository.dart';
+
 class Pokemon {
+  final PokemonRepository repository = HomeModule.to.get<PokemonRepository>();
+  final HomeController controller = HomeModule.to.get<HomeController>();
 
   final String id;
   final List<dynamic> types;
@@ -19,6 +25,15 @@ class Pokemon {
     @required this.name,
     @required this.cardType
   });
+
+  bool owned () {
+    var found = controller.pokemons.firstWhere(
+      (element) => element.id == id,
+      orElse: () => null
+    );
+
+    return found != null;
+  }
 
   String uniqueId() {
     print(cardType.toString() + id);

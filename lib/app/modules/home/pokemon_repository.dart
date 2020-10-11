@@ -30,12 +30,23 @@ class PokemonRepository extends Disposable {
     shared.setStringList(OWNED_KEY, pokemons);
   }
 
+  void removeFromOwnedList(String pokemonId) async {
+    var shared = await SharedPreferences.getInstance();
+    var pokemons = shared.getStringList(OWNED_KEY)
+        .map<Pokemon>((json) => Pokemon.fromJson(json))
+        .toList();
+
+    pokemons.removeWhere((element) => element.id == pokemonId);
+    List<String> pokemonsJson =
+      pokemons.map<String>((pokemon) => pokemon.toJson(pokemon.cardType)).toList();
+    shared.setStringList(OWNED_KEY, pokemonsJson);
+  }
+
+
+
   Future<List<Pokemon>> getOwnedPokemons() async {
     var shared = await SharedPreferences.getInstance();
     var pokemons = shared.getStringList(OWNED_KEY);
-
-    print('teste');
-    print(pokemons.toString());
 
     if (pokemons == null) {
       return [];

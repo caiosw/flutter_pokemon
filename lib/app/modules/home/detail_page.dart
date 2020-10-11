@@ -16,10 +16,17 @@ class PageDetail extends StatefulWidget {
 
 class _PageDetailState extends State<PageDetail> {
   bool showExpandedCard = false;
+  bool ownedPokemon;
 
   final HomeController controller = HomeModule.to.get<HomeController>();
 
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    ownedPokemon = widget.pokemon.owned();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +41,8 @@ class _PageDetailState extends State<PageDetail> {
                 onPressed: null
             ),
             IconButton(
-                icon: Icon(Icons.person_add),
-                onPressed: () => addToOwnedList()
+                icon: ownedPokemon ? Icon(Icons.person_remove) : Icon(Icons.person_add),
+                onPressed: () => addOrRemoveFromOwnedList()
             )
           ],
         ),
@@ -78,10 +85,21 @@ class _PageDetailState extends State<PageDetail> {
     });
   }
 
-  addToOwnedList() {
-    controller.addToOwnedList(widget.pokemon);
-    _key.currentState.showSnackBar(SnackBar(
+  addOrRemoveFromOwnedList() {
+    if (ownedPokemon) {
+      controller.removeFromOwnedList(widget.pokemon.id);
+      _key.currentState.showSnackBar(SnackBar(
+        content: Text("Removido da lista de obtidos!"),
+      ));
+    } else {
+      controller.addToOwnedList(widget.pokemon);
+      _key.currentState.showSnackBar(SnackBar(
         content: Text("Adicionado na lista de obtidos!"),
-    ));
+      ));
+    }
+
+    setState(() {
+      ownedPokemon = !ownedPokemon;
+    });
   }
 }

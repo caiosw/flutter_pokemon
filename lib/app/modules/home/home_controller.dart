@@ -37,4 +37,9 @@ abstract class _HomeControllerBase with Store {
     return repository.getAllPokemons();
   }
 
+  removeFromOwnedList (String pokemonId) async {
+    repository.removeFromOwnedList(pokemonId);
+    updateOwnedPokemons();
+  }
+
 }
