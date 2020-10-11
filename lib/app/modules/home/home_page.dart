@@ -68,7 +68,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             label: "Obtidos"
           )
         ],),
-      body: pages[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages
+      ),
     );
   }
 

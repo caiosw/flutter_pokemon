@@ -25,11 +25,10 @@ class _MyCardsPageState extends ModularState<MyCardsPage, HomeController> {
   }
 
   void loadPokemons () async {
-    var allPokemons = await repository.getOwnedPokemons();
+    var myPokemons = await repository.getOwnedPokemons();
     setState(() {
-      pokemons = allPokemons;
+      pokemons = myPokemons;
     });
-    print(pokemons);
   }
 
   @override
