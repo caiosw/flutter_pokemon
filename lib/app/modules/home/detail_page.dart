@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokemon_dio/app/modules/home/home_controller.dart';
 import 'package:pokemon_dio/app/modules/home/pokemon_repository.dart';
 
 import 'domain/pokemon.dart';
@@ -16,7 +17,7 @@ class PageDetail extends StatefulWidget {
 class _PageDetailState extends State<PageDetail> {
   bool showExpandedCard = false;
 
-  final PokemonRepository repository = HomeModule.to.get<PokemonRepository>();
+  final HomeController controller = HomeModule.to.get<HomeController>();
 
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
@@ -78,7 +79,7 @@ class _PageDetailState extends State<PageDetail> {
   }
 
   addToOwnedList() {
-    repository.addToOwnedList(widget.pokemon);
+    controller.addToOwnedList(widget.pokemon);
     _key.currentState.showSnackBar(SnackBar(
         content: Text("Adicionado na lista de obtidos!"),
     ));

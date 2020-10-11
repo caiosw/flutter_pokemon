@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokemon_dio/app/modules/home/pokemon_repository.dart';
 import 'detail_page.dart';
@@ -14,44 +15,37 @@ class MyCardsPage extends StatefulWidget {
 
 class _MyCardsPageState extends ModularState<MyCardsPage, HomeController> {
   //use 'controller' variable to access controller
-  final PokemonRepository repository = HomeModule.to.get<PokemonRepository>();
 
-  List<Pokemon> pokemons = [];
+  final HomeController controller = HomeModule.to.get<HomeController>();
 
   @override
   void initState() {
-    loadPokemons();
+    controller.updateOwnedPokemons();
     super.initState();
-  }
-
-  void loadPokemons () async {
-    var myPokemons = await repository.getOwnedPokemons();
-    setState(() {
-      pokemons = myPokemons;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.count(
-        childAspectRatio: 0.72,
-        crossAxisCount: 2,
-        children: List.generate(pokemons.length, (index) {
-          var pokemon = pokemons[index];
-
-          return GestureDetector(
-            onTap: () => openPageDetail(pokemon),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 5.0),
-              child: Hero(
-                tag: pokemon.uniqueId,
-                child: Image.network(pokemon.imageUrl)
+      body: Observer(
+        builder: (_) => GridView.count(
+          childAspectRatio: 0.72,
+          crossAxisCount: 2,
+          children: List.generate(controller.getOwnedPokemons().length, (index) {
+            var pokemon = controller.getOwnedPokemons()[index];
+            return GestureDetector(
+              onTap: () => openPageDetail(pokemon),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Hero(
+                  tag: pokemon.uniqueId,
+                  child: Image.network(pokemon.imageUrl)
+                )
               )
-            )
-          );
-        }),
-      ),
+            );
+          }),
+        )
+      )
     );
   }
 
