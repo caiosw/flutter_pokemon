@@ -82,13 +82,11 @@ class _PageDetailState extends State<PageDetail> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
-                    child: Stack(children: <Widget>[
-                      Center(child: CircularProgressIndicator()),
-                      Center(child: FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: widget.pokemon.imageUrlHiRes
-                      ))
-                    ]),
+                    child: Center(
+                      child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/spinning_pokeball_md.gif',
+                      image: widget.pokemon.imageUrlHiRes)
+                    ),
                   ),
                 ),
               ),

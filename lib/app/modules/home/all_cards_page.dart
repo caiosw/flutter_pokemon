@@ -64,9 +64,8 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
               child: Hero(
                 tag: pokemon.uniqueId,
                 child: Stack(children: <Widget>[
-                  Center(child: CircularProgressIndicator()),
-                  Center(child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
+                  Center(child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/spinning_pokeball_sm.gif',
                     image: pokemon.imageUrl)
                   ),
                   Visibility(
