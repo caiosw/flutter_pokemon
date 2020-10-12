@@ -74,8 +74,8 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
                     child: Positioned(
                       bottom: 5, left: -12, //give the values according to your requirement
                       child: RawMaterialButton(
-                        fillColor: Colors.white,
-                        child: Icon(Icons.favorite, color: Colors.red,),
+                        fillColor: Colors.red,
+                        child: Icon(Icons.favorite, color: Colors.white),
                         padding: EdgeInsets.all(5.0),
                         shape: CircleBorder(),
                       ),
@@ -86,8 +86,8 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
                     child: Positioned(
                       bottom: 5, right: -12, //give the values according to your requirement
                       child: RawMaterialButton(
-                        fillColor: Colors.white,
-                        child: Icon(Icons.check_box, color: Colors.blue,),
+                        fillColor: Colors.blue,
+                        child: Icon(Icons.check_box, color: Colors.white),
                         padding: EdgeInsets.all(5.0),
                         shape: CircleBorder(),
                       ),

@@ -49,13 +49,13 @@ class _PageDetailState extends State<PageDetail> {
           IconButton(
               icon: favoritePokemon
                   ? Icon(Icons.favorite, color: Colors.red)
-                  : Icon(Icons.favorite, color: Colors.grey),
+                  : Icon(Icons.favorite_outline, color: Colors.red),
               onPressed: () => addOrRemoveFromFavoriteList()
           ),
           IconButton(
               icon: ownedPokemon
                 ? Icon(Icons.check_box, color: Colors.blue)
-                : Icon(Icons.check_box_outline_blank, color: Colors.blue),
+                : Icon(Icons.crop_square, color: Colors.blue),
               onPressed: () => addOrRemoveFromOwnedList()
           )
         ],

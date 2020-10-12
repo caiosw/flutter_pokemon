@@ -58,6 +58,30 @@ class _FavoritesPageState extends ModularState<FavoritesPage, HomeController> {
                     Center(child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
                         image: pokemon.imageUrl)
+                    ),
+                    Visibility(
+                      visible: pokemon.favorite(),
+                      child: Positioned(
+                        bottom: 5, left: -12, //give the values according to your requirement
+                        child: RawMaterialButton(
+                          fillColor: Colors.red,
+                          child: Icon(Icons.favorite, color: Colors.white,),
+                          padding: EdgeInsets.all(5.0),
+                          shape: CircleBorder(),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: pokemon.owned(),
+                      child: Positioned(
+                        bottom: 5, right: -12, //give the values according to your requirement
+                        child: RawMaterialButton(
+                          fillColor: Colors.blue,
+                          child: Icon(Icons.check_box, color: Colors.white,),
+                          padding: EdgeInsets.all(5.0),
+                          shape: CircleBorder(),
+                        ),
+                      ),
                     )
                   ])
                 )

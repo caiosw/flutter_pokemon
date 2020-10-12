@@ -38,7 +38,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             label: "Favoritos"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.library_add_check),
             label: "Obtidos"
           )
         ],),
