@@ -54,8 +54,8 @@ class _PageDetailState extends State<PageDetail> {
           ),
           IconButton(
               icon: ownedPokemon
-                ? Icon(Icons.person_remove, color: Colors.blue)
-                : Icon(Icons.person_add, color: Colors.blue),
+                ? Icon(Icons.check_box, color: Colors.blue)
+                : Icon(Icons.check_box_outline_blank, color: Colors.blue),
               onPressed: () => addOrRemoveFromOwnedList()
           )
         ],

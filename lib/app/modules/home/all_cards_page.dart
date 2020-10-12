@@ -68,6 +68,30 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
                   Center(child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: pokemon.imageUrl)
+                  ),
+                  Visibility(
+                    visible: pokemon.favorite(),
+                    child: Positioned(
+                      bottom: 5, left: -12, //give the values according to your requirement
+                      child: RawMaterialButton(
+                        fillColor: Colors.white,
+                        child: Icon(Icons.favorite, color: Colors.red,),
+                        padding: EdgeInsets.all(5.0),
+                        shape: CircleBorder(),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: pokemon.owned(),
+                    child: Positioned(
+                      bottom: 5, right: -12, //give the values according to your requirement
+                      child: RawMaterialButton(
+                        fillColor: Colors.white,
+                        child: Icon(Icons.check_box, color: Colors.blue,),
+                        padding: EdgeInsets.all(5.0),
+                        shape: CircleBorder(),
+                      ),
+                    ),
                   )
                 ])
               )
