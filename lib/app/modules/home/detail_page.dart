@@ -33,15 +33,24 @@ class _PageDetailState extends State<PageDetail> {
     return Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text(widget.pokemon.name),
-          centerTitle: true,
+          iconTheme: IconThemeData(
+            color: Colors.grey, //change your color here
+          ),
+          title: Text(
+            widget.pokemon.name,
+            style: TextStyle(color: Colors.red)
+          ),
+          backgroundColor: Colors.white,
+          centerTitle: false,
           actions: [
             IconButton(
                 icon: Icon(Icons.favorite),
                 onPressed: null
             ),
             IconButton(
-                icon: ownedPokemon ? Icon(Icons.person_remove) : Icon(Icons.person_add),
+                icon: ownedPokemon
+                  ? Icon(Icons.person_remove, color: Colors.blue)
+                  : Icon(Icons.person_add, color: Colors.blue),
                 onPressed: () => addOrRemoveFromOwnedList()
             )
           ],

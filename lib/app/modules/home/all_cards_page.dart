@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokemon_dio/app/modules/home/pokemon_repository.dart';
+import 'package:pokemon_dio/app/modules/home/search.dart';
 import 'detail_page.dart';
 import 'domain/pokemon.dart';
 import 'home_controller.dart';
@@ -36,6 +38,18 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Lista de Cards"),
+        backgroundColor: Colors.red,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: Search(pokemons));
+            }
+          )
+        ],
+      ),
       body: GridView.count(
         childAspectRatio: 0.72,
         crossAxisCount: 2,
