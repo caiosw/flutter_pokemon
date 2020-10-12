@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokemon_dio/app/modules/home/pokemon_repository.dart';
+import 'package:pokemon_dio/app/modules/home/search.dart';
 import 'detail_page.dart';
 import 'domain/pokemon.dart';
 import 'home_controller.dart';
@@ -28,6 +29,18 @@ class _MyCardsPageState extends ModularState<MyCardsPage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Lista de Obtidos"),
+        backgroundColor: Colors.red,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: Search(controller.getOwnedPokemons()));
+            }
+          )
+        ],
+      ),
       body: Observer(
         builder: (_) => GridView.count(
           childAspectRatio: 0.72,
