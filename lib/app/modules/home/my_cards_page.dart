@@ -30,7 +30,7 @@ class _MyCardsPageState extends ModularState<MyCardsPage, HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de Obtidos"),
+        title: Text("Cards Obtidos"),
         backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
