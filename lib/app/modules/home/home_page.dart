@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokemon_dio/app/modules/home/all_cards_page.dart';
+import 'package:pokemon_dio/app/modules/home/favorites_page.dart';
 import 'package:pokemon_dio/app/modules/home/my_cards_page.dart';
-import 'detail_page.dart';
-import 'domain/pokemon.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   List<Widget> pages = [
     AllCardsPage(),
-    Container(),
+    FavoritesPage(),
     MyCardsPage()
   ];
 
@@ -47,14 +46,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         index: _currentIndex,
         children: pages
       ),
-    );
-  }
-
-  openPageDetail(Pokemon pokemon) {
-    Navigator.of(context).push(PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return PageDetail(pokemon: pokemon);
-      })
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../home_controller.dart';
 import '../home_module.dart';
 import '../pokemon_repository.dart';
+import 'card_type.dart';
 
 class Pokemon {
   final PokemonRepository repository = HomeModule.to.get<PokemonRepository>();
@@ -30,6 +31,15 @@ class Pokemon {
     var found = controller.pokemons.firstWhere(
       (element) => element.id == id,
       orElse: () => null
+    );
+
+    return found != null;
+  }
+
+  bool favorite () {
+    var found = controller.favoritePokemons.firstWhere(
+            (element) => element.id == id,
+        orElse: () => null
     );
 
     return found != null;
@@ -71,23 +81,7 @@ class Pokemon {
         cardType: CardTypeHelper.fromString(map['cardType'])
     );
   }
+
+
 }
 
-enum CardType { FAVORITE, PUBLIC, MY_CARD }
-
-class CardTypeHelper {
-  static fromString(String cardType) {
-    if (cardType == null) {
-      return CardType.PUBLIC;
-    }
-
-    for (var type in CardType.values) {
-      if (type.toString().contains(cardType)) {
-        return type;
-      }
-
-      return CardType.PUBLIC;
-    }
-
-  }
-}

@@ -34,6 +34,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$favoritePokemonsAtom =
+      Atom(name: '_HomeControllerBase.favoritePokemons');
+
+  @override
+  List<Pokemon> get favoritePokemons {
+    _$favoritePokemonsAtom.reportRead();
+    return super.favoritePokemons;
+  }
+
+  @override
+  set favoritePokemons(List<Pokemon> value) {
+    _$favoritePokemonsAtom.reportWrite(value, super.favoritePokemons, () {
+      super.favoritePokemons = value;
+    });
+  }
+
   final _$updateOwnedPokemonsAsyncAction =
       AsyncAction('_HomeControllerBase.updateOwnedPokemons');
 
@@ -43,10 +59,20 @@ mixin _$HomeController on _HomeControllerBase, Store {
         .run(() => super.updateOwnedPokemons());
   }
 
+  final _$updateFavoritePokemonsAsyncAction =
+      AsyncAction('_HomeControllerBase.updateFavoritePokemons');
+
+  @override
+  Future updateFavoritePokemons() {
+    return _$updateFavoritePokemonsAsyncAction
+        .run(() => super.updateFavoritePokemons());
+  }
+
   @override
   String toString() {
     return '''
-pokemons: ${pokemons}
+pokemons: ${pokemons},
+favoritePokemons: ${favoritePokemons}
     ''';
   }
 }

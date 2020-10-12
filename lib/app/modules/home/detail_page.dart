@@ -18,6 +18,7 @@ class PageDetail extends StatefulWidget {
 class _PageDetailState extends State<PageDetail> {
   bool showExpandedCard = false;
   bool ownedPokemon;
+  bool favoritePokemon;
 
   final HomeController controller = HomeModule.to.get<HomeController>();
 
@@ -26,6 +27,7 @@ class _PageDetailState extends State<PageDetail> {
   @override
   void initState() {
     ownedPokemon = widget.pokemon.owned();
+    favoritePokemon = widget.pokemon.favorite();
     super.initState();
   }
 
@@ -35,7 +37,7 @@ class _PageDetailState extends State<PageDetail> {
       key: _key,
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.grey, //change your color here
+          color: Colors.black, //change your color here
         ),
         title: Text(
           widget.pokemon.name,
@@ -45,8 +47,10 @@ class _PageDetailState extends State<PageDetail> {
         centerTitle: false,
         actions: [
           IconButton(
-              icon: Icon(Icons.favorite),
-              onPressed: null
+              icon: favoritePokemon
+                  ? Icon(Icons.favorite, color: Colors.red)
+                  : Icon(Icons.favorite, color: Colors.grey),
+              onPressed: () => addOrRemoveFromFavoriteList()
           ),
           IconButton(
               icon: ownedPokemon
@@ -116,6 +120,24 @@ class _PageDetailState extends State<PageDetail> {
 
     setState(() {
       ownedPokemon = !ownedPokemon;
+    });
+  }
+
+  addOrRemoveFromFavoriteList() {
+    if (favoritePokemon) {
+      controller.removeFromFavoriteList(widget.pokemon.id);
+      _key.currentState.showSnackBar(SnackBar(
+        content: Text("Removido da lista de favoritos!"),
+      ));
+    } else {
+      controller.addToFavoriteList(widget.pokemon);
+      _key.currentState.showSnackBar(SnackBar(
+        content: Text("Adicionado na lista de favoritos!"),
+      ));
+    }
+
+    setState(() {
+      favoritePokemon = !favoritePokemon;
     });
   }
 }
