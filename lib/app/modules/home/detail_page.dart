@@ -5,6 +5,7 @@ import 'package:pokemon_dio/app/modules/home/pokemon_repository.dart';
 
 import 'domain/pokemon.dart';
 import 'home_module.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class PageDetail extends StatefulWidget {
   final Pokemon pokemon;
@@ -31,60 +32,66 @@ class _PageDetailState extends State<PageDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _key,
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.grey, //change your color here
-          ),
-          title: Text(
-            widget.pokemon.name,
-            style: TextStyle(color: Colors.red)
-          ),
-          backgroundColor: Colors.white,
-          centerTitle: false,
-          actions: [
-            IconButton(
-                icon: Icon(Icons.favorite),
-                onPressed: null
-            ),
-            IconButton(
-                icon: ownedPokemon
-                  ? Icon(Icons.person_remove, color: Colors.blue)
-                  : Icon(Icons.person_add, color: Colors.blue),
-                onPressed: () => addOrRemoveFromOwnedList()
-            )
-          ],
+      key: _key,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.grey, //change your color here
         ),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () => changeCardExibition(),
-                    child: Visibility(
-                      visible: !showExpandedCard,
-                      child: Hero(
-                          tag: widget.pokemon.uniqueId,
-                          child: Image.network(widget.pokemon.imageUrl)
-                      ),
-                    ),
+        title: Text(
+          widget.pokemon.name,
+          style: TextStyle(color: Colors.red)
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: false,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.favorite),
+              onPressed: null
+          ),
+          IconButton(
+              icon: ownedPokemon
+                ? Icon(Icons.person_remove, color: Colors.blue)
+                : Icon(Icons.person_add, color: Colors.blue),
+              onPressed: () => addOrRemoveFromOwnedList()
+          )
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () => changeCardExibition(),
+              child: Visibility(
+                visible: !showExpandedCard,
+                child: Hero(
+                  tag: widget.pokemon.uniqueId,
+                  child: Image.network(widget.pokemon.imageUrl)
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () => changeCardExibition(),
+              child: Visibility(
+                visible: showExpandedCard,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    child: Stack(children: <Widget>[
+                      Center(child: CircularProgressIndicator()),
+                      Center(child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: widget.pokemon.imageUrlHiRes
+                      ))
+                    ]),
                   ),
-                  GestureDetector(
-                    onTap: () => changeCardExibition(),
-                    child: Visibility(
-                      visible: showExpandedCard,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                            child: Image.network(widget.pokemon.imageUrlHiRes)
-                        ),
-                      ),
-                    ),
-                  ),
-                ]
+                ),
+              ),
             )
+          ]
         )
+      )
     );
   }
 

@@ -7,6 +7,7 @@ import 'detail_page.dart';
 import 'domain/pokemon.dart';
 import 'home_controller.dart';
 import 'home_module.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class AllCardsPage extends StatefulWidget {
 
@@ -62,7 +63,13 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
               padding: const EdgeInsets.only(bottom: 5.0),
               child: Hero(
                 tag: pokemon.uniqueId,
-                child: Image.network(pokemon.imageUrl)
+                child: Stack(children: <Widget>[
+                  Center(child: CircularProgressIndicator()),
+                  Center(child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: pokemon.imageUrl)
+                  )
+                ])
               )
             )
           );
