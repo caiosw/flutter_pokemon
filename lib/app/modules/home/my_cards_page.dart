@@ -52,14 +52,6 @@ class _MyCardsPageState extends ModularState<MyCardsPage, HomeController> {
       )
     );
   }
-
-  openPageDetail(Pokemon pokemon) {
-    Navigator.of(context).push(PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) {
-          return PageDetail(pokemon: pokemon);
-        })
-    );
-  }
 }
 
 

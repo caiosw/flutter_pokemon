@@ -59,8 +59,6 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
       ),
     );
   }
-
-
 }
 
 

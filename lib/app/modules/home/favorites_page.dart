@@ -52,14 +52,6 @@ class _FavoritesPageState extends ModularState<FavoritesPage, HomeController> {
       )
     );
   }
-
-  openPageDetail(Pokemon pokemon) {
-    Navigator.of(context).push(PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) {
-          return PageDetail(pokemon: pokemon);
-        })
-    );
-  }
 }
 
 
