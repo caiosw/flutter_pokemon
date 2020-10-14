@@ -1,16 +1,14 @@
 # pokemon_dio
 
-A new Flutter project. Created by Slidy
+My first Flutter project! From Digital Innovation One (https://web.digitalinnovation.one) lab, teached by https://github.com/ThiagoBfim/
+Commits 1 to 12 were made following Thiago, 13 and so on I figured out by myself.
 
-## Getting Started
+# Technologies
+Flutter
+API - pokemontcg.io
+Slidy
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Main Packages
+Flutter Modular
+Mobx
+Dio
