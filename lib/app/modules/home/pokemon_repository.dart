@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dio/native_imp.dart';
 import 'package:pokemon_dio/app/modules/home/domain/pokemon.dart';
@@ -11,6 +13,7 @@ part 'pokemon_repository.g.dart';
 @Injectable()
 class PokemonRepository extends Disposable {
   static const OWNED_KEY = "OWNED_KEY";
+  static const SEARCH_KEY = "SEARCH_KEY";
   final DioForNative client;
 
   PokemonRepository(this.client);
@@ -102,6 +105,53 @@ class PokemonRepository extends Disposable {
     }
 
     return [];
+  }
+
+  Future<List<Pokemon>> getSearchHistory() async {
+    var shared = await SharedPreferences.getInstance();
+    var pokemons = shared.getStringList(SEARCH_KEY)
+        .map<Pokemon>((json) => Pokemon.fromJson(json))
+        .toList();
+
+    if (pokemons == null) {
+      return [];
+    }
+    return pokemons;
+  }
+
+  void addToSearchHistory(Pokemon pokemon) async {
+    var shared = await SharedPreferences.getInstance();
+    var pokemonList = shared.getStringList(SEARCH_KEY);
+    var pokemons;
+
+    if (pokemonList != null) {
+      pokemons = pokemonList
+        .map<Pokemon>((json) => Pokemon.fromJson(json))
+        .toList();
+    } else {
+      pokemons = [];
+    }
+
+    bool found = false;
+    for (Pokemon _pokemon in pokemons) {
+      if (_pokemon.id == pokemon.id) {
+        found = true;
+      }
+    }
+
+    if (!found) {
+      pokemons.add(pokemon);
+      if (pokemons.length > 3) {
+        pokemons.removeAt(0);
+      }
+
+      List<String> json = [];
+      for (Pokemon pokemon in pokemons) {
+        json.add(pokemon.toJson(CardType.PUBLIC));
+      }
+
+      shared.setStringList(SEARCH_KEY, json);
+    }
   }
 }
 

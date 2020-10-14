@@ -46,7 +46,6 @@ class Pokemon {
   }
 
   String uniqueId() {
-    print(cardType.toString() + id);
     return cardType.toString() + id;
   }
 

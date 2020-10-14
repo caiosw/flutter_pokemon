@@ -77,6 +77,7 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
                         child: Icon(Icons.favorite, color: Colors.white),
                         padding: EdgeInsets.all(5.0),
                         shape: CircleBorder(),
+                        onPressed: () {  },
                       ),
                     ),
                   ),
@@ -89,6 +90,7 @@ class _AllCardsPageState extends ModularState<AllCardsPage, HomeController> {
                         child: Icon(Icons.check_box, color: Colors.white),
                         padding: EdgeInsets.all(5.0),
                         shape: CircleBorder(),
+                        onPressed: () {  },
                       ),
                     ),
                   )
